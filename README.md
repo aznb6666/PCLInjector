@@ -6,6 +6,7 @@
 - 只改方法体内部字节，**文件大小不变**
 - 不写死文件偏移 / metadata token，按方法名与 IL 结构特征动态定位，可适应重新编译的版本
 - 单文件发布，最终产物只有一个 `PCLInjector.exe`（约 1.4 MB）
+- 编译好的 exe 已发布在 [Releases](https://github.com/aznb6666/PCLInjector/releases)，可直接下载使用
 
 > **合规声明**：本工具仅用于对**你自己拥有合法副本的程序**进行二次开发/功能解锁。请遵守相应软件的许可证与当地法律，不要用于分发侵权产物。
 
@@ -86,7 +87,7 @@
 
 ## 使用方法
 
-1. 运行 `PCLInjector.exe`（需系统安装 **.NET 10 桌面运行时**）。
+1. 从 [Releases](https://github.com/aznb6666/PCLInjector/releases) 下载 `PCLInjector.exe` 并运行（需系统安装 **.NET 10 桌面运行时**）。
 2. 点击"**选择 exe**"，选中目标主程序（如 `PCL2_CE_Release_x64.exe`）。
 3. 点击"**绕过正版验证**"，弹窗选择写入方式：
    - **备份原文件（推荐）**：先把原 exe 复制为同目录下的 `<原名>.exe.bak`（已存在则不覆盖），再写入补丁。出问题可用 `.bak` 还原。
@@ -121,7 +122,7 @@ bash scripts/publish-singlefile.sh [输出目录]   # 默认 publish/
 - `PublishSingleFile=true` + `IncludeNativeLibrariesForSelfExtract=true`：dnlib.dll、deps/runtimeconfig 全部嵌入 exe
 - 不启用压缩（framework-dependent + 压缩会触发 `NETSDK1176`），发布后删除 PDB
 
-产物：`publish/PCLInjector.exe`，目录内只有这一个 exe，无 dll/json/pdb 附带文件。
+产物：运行脚本后生成 `publish/PCLInjector.exe`（目录内只有这一个 exe，无 dll/json/pdb 附带文件）。该目录已加入 `.gitignore`，正式发布产物上传至 Releases。
 
 ### 普通构建
 
@@ -155,8 +156,8 @@ PCLInjector/
 ├── scripts/
 │   ├── publish-singlefile.sh # 单文件发布脚本
 │   └── gen_icon.py           # 图标生成脚本
-├── publish/
-│   └── PCLInjector.exe       # ← 构建产物（单文件，可直接运行）
+├── publish/                  # 本地构建输出（.gitignore 忽略，不入库）
+│   └── PCLInjector.exe       # ← 由发布脚本生成；正式产物见 Releases
 └── ui-preview/               # 界面与图标预览图
 ```
 

@@ -1,4 +1,5 @@
-# .NET 编译中间产物
+# 构建产物（发布到 GitHub Releases，不入库）
+publish/
 bin/
 obj/
 
