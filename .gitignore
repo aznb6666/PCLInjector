@@ -1,0 +1,12 @@
+# .NET 编译中间产物
+bin/
+obj/
+
+# 本地 IDE 配置
+*.user
+*.suo
+.vs/
+
+# 其他
+*.pdb
+*.tmp
